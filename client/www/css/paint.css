@@ -1,11 +1,23 @@
 .colorpickerReplacer {
+	background-color: white;
+	border-color: #888888;
+	width : 70px;
+	height : 44px;
 #	width : 100px;
 #	height: 100px;
 }
 
+.sp-replacer:hover, .sp-replacer.sp-active {
+	border-color: #888888;
+}
+
 .sp-preview {
-	width : 80px;
-	height : 80px;
+	width : 68px;
+	height : 42px;
+}
+
+.sp-dd {
+	display : none;
 }
 
 .sp-thumb-el {
@@ -54,6 +66,30 @@
 }
 
 .action:hover {
-	color: #18B6F8;
 	cursor: pointer;
+}
+
+.header-action {
+	margin: 0px 20px;
+}
+
+.active-size {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAMdJREFUOE+tkgsNwzAMRMugEAahEAahEAZhEAqlEAZhEAohEAYh81X2dIm8fKpEspLGvudPOsUYpxE2BIJCroJmEW9qJ+MKaBFhEMNabSy9oIcIPwrB+afvAUFoK4H0tMaQ3XtlrggDhOVVMuT4E5MMG0FBbCEYzjYT7OxLEvIHQLY2zWwQ3D+9luyOQTfKDiFD3iUIfPk8VqrKjgAiSfGFPecrg6HN6m/iBcwiDAo7WiBeawa+Kwh7tZoSCGLMqwlSAzVDhoK+6vH4G0P5wdkAAAAASUVORK5CYII=);
+	background-position: 90% 50%;
+	background-repeat: no-repeat;
+	background-color: #ECECEC;
+}
+
+.brush-size-item {
+	font-size: 24px;
+	padding: 30px 25px !important;
+}
+
+.divider {
+	background-color: #888888;
+	border-color: #888888;
+}
+
+.dropdown-menu {
+	min-width: 0px !important;
 }

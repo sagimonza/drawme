@@ -1,13 +1,18 @@
 
 (function() {
 
-var radius = 20;
-
 var canvasElem = document.getElementById("overlayCanvas");
 
 window.CanvasOverlaySketch = {
 	clear : function() {
 		ctx.clear();
+	},
+	
+	init : function() {
+		ctx.globalCompositeOperation = "source-over";
+		ctx.fillStyle = "rgba(153,153,153,1)";
+		ctx.fillRect(0, 0, ctx.width, ctx.height);
+		ctx.globalCompositeOperation = "destination-out";
 	},
 	
 	show : function() {
@@ -17,14 +22,9 @@ window.CanvasOverlaySketch = {
 			zIndex : 5,
 			top : CanvasSketch.rect.top
 		});
-		ctx.globalCompositeOperation = "source-over";
-		ctx.fillStyle = "rgba(153,153,153,1)";
-		ctx.fillRect(0, 0, ctx.width, ctx.height);
-		ctx.globalCompositeOperation = "destination-out";
 	},
 	
 	hide : function() {
-		this.clear();
 		$(canvasElem).css({ display : "none" });
 	}
 };
@@ -41,6 +41,9 @@ var ctx = Sketch.create({
 		this.clear();
 	},
 	touchmove: function() {
+		this._drawLine();
+	},
+	_drawLine : function() {
 		for ( var i = this.touches.length - 1, touch; i >= 0; i-- ) {
 
 			touch = this.touches[i];
@@ -48,11 +51,15 @@ var ctx = Sketch.create({
 			this.lineCap = 'round';
 			this.lineJoin = 'round';
 			this.fillStyle = this.strokeStyle = "";//"#E3EB64";
-			this.lineWidth = radius;
+			this.lineWidth = Brush.size;
 
 			this.beginPath();
-			this.moveTo( touch.ox, touch.oy );
-			this.lineTo( touch.x, touch.y );
+			var toX = touch.x != touch.ox ? touch.x :
+				touch.x + 1 <= ctx.width ? touch.x + 1 : touch.x - 1;
+			var toY = touch.y != touch.oy ? touch.y :
+				touch.y + 1 <= ctx.height ? touch.y + 1 : touch.y - 1;
+			this.moveTo(touch.ox, touch.oy);
+			this.lineTo(toX, toY);
 			this.stroke();
 		}
 	}

@@ -1,13 +1,19 @@
 
 (function() {
 
-var radius = 20;
-
 var mainElem = document.getElementById("mainCanvas");
 
 window.CanvasSketch = {
 	clear : function() {
 		ctx.clear();
+	},
+	
+	disable : function() {
+		ctx._disabled = true;
+	},
+	
+	enable : function() {
+		ctx._disabled = false;
 	},
 	
 	get rect() {
@@ -22,11 +28,18 @@ var ctx = Sketch.create({
 	update: function() {
 		//radius = 2 + abs( sin( this.millis * 0.003 ) * 50 );
 	},
-	keydown : function() {
-		//if ( this.keys.C )
-		this.clear();
+	mousedown : function() {
+		this._drawLine();
+	},
+	touchstart : function() {
+		//this._drawLine();
 	},
 	touchmove: function() {
+		this._drawLine();
+	},
+	_drawLine : function() {
+		if (this._disabled) return;
+		
 		for ( var i = this.touches.length - 1, touch; i >= 0; i-- ) {
 
 			touch = this.touches[i];
@@ -34,11 +47,15 @@ var ctx = Sketch.create({
 			this.lineCap = 'round';
 			this.lineJoin = 'round';
 			this.fillStyle = this.strokeStyle = ColorPicker.color;//"#E3EB64";
-			this.lineWidth = radius;
+			this.lineWidth = Brush.size;
 
 			this.beginPath();
-			this.moveTo( touch.ox, touch.oy );
-			this.lineTo( touch.x, touch.y );
+			var toX = touch.x != touch.ox ? touch.x :
+				touch.x + 1 <= ctx.width ? touch.x + 1 : touch.x - 1;
+			var toY = touch.y != touch.oy ? touch.y :
+				touch.y + 1 <= ctx.height ? touch.y + 1 : touch.y - 1;
+			this.moveTo(touch.ox, touch.oy);
+			this.lineTo(toX, toY);
 			this.stroke();
 		}
 	}

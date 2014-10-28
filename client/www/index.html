@@ -1,29 +1,45 @@
 <html>
 <head>
-	<link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/spectrum.css"/>
-	<link rel="stylesheet" href="css/paint.css"/>
+	<link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/spectrum.css" />
+	<link type="text/css" rel="stylesheet" href="css/jquery.dropdown.css" />
+	<link rel="stylesheet" href="css/paint.css" />
+	
 	<script src="lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.dropdown.min.js"></script>
 	<script src="lib/spectrum-min.js"></script>
 	<script src="lib/sketch.min.js"></script>
 </head>
 <body>
 	<div>
 		<div class="actionsContainer">
-			<input class="action" id="colorpicker" type="text"></input>
-			<div id="clearCanvas" class="action"><i class="fa fa-remove fa-3x"></i></div>
-			<div id="flightTest" class="action"><i class="fa fa-play fa-3x"></i></div>
-			<div id="restartCanvas" class="action" style="display:none"><i class="fa fa-refresh fa-3x"></i></div>
-			<div id="sendCanvas" class="action"><i class="fa fa-send fa-3x"></i></div>
+			<input id="colorpicker" class="header-action action" type="text"></input>
+			<div id="brushSize" data-dropdown="#brushSizeMenu" class="header-action action"><i class="fa fa-pencil fa-3x"></i></div>
+			<div id="clearCanvas" class="header-action action"><i class="fa fa-trash-o fa-3x"></i></div>
+			<div id="flightTest" class="header-action action"><i class="fa fa-play fa-3x"></i></div>
+			<div id="restartCanvas" class="header-action action" style="display:none"><i class="fa fa-refresh fa-3x"></i></div>
+			<div id="glanceCanvas" class="header-action action" style="display:none"><i class="fa fa-eye fa-3x"></i></div>
+			<div id="sendCanvas" class="header-action action"><i class="fa fa-send fa-3x"></i></div>
 		</div>
 	</div>
+	<hr class="divider" size="6" noshade>
 	<div id="mainCanvas"></div>
 	<div id="overlayCanvas" style="display:none;"></div>
+
+	<div id="brushSizeMenu" class="dropdown">
+		<ul class="dropdown-menu">
+			<li class="brush-size-item action" data-size="small"><i class="fa fa-pencil fa-lg"></i></li>
+			<li class="brush-size-item action" data-size="medium"><i class="fa fa-pencil fa-2x"></i></li>
+			<li class="brush-size-item action" data-size="large" data-size="large"><i class="fa fa-pencil fa-3x"></i></li>
+			<li class="brush-size-item action" data-size="huge"><i class="fa fa-pencil fa-4x"></i></li>
+		</ul>
+	</div>
 	
 	<script src="js/colorpicker.js"></script>
 	<script src="js/canvas_sketch.js"></script>
 	<script src="js/canvas_overlay_sketch.js"></script>
 	<script src="js/canvas_actions.js"></script>
+	<script src="js/brush.js"></script>
 	<script src="js/paint.js"></script>
 </body>
 </html>

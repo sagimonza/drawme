@@ -17,9 +17,9 @@ $("#colorpicker").spectrum({
     replacerClassName: "colorpickerReplacer",
     maxSelectionSize: 0,
     palette: [
-		["#000", "#999", "#f00"],
-		["#f90", "#ff0", "#0f0"],
-		["#90f", "#f0f", "blue"]
+		["black", "red"],
+		["blue", "green"],
+		["yellow", "orange"]
 	]
 });
 
