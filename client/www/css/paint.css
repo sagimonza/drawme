@@ -25,18 +25,31 @@
 .actionsContainer {
 	max-width: 930px;
 	min-width: 930px;
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-flow: row nowrap;
+	-webkit-flex-flow: row nowrap;
 	justify-content: flex-start;
+	-webkit-justify-content: flex-start;
 	align-items: center;
+	-webkit-align-items: center;
 	font-size: 18px;
 	font-weight: normal;
 }
 
 .action {
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex: 0 1 80px;
-	display: flex;
+	-webkit-flex: 0 1 80px;
 	justify-content: center;
+	-webkit-justify-content: center;
 	color: #888888;
 }
 
