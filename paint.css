@@ -1,0 +1,46 @@
+.colorpickerReplacer {
+#	width : 100px;
+#	height: 100px;
+}
+
+.sp-preview {
+	width : 80px;
+	height : 80px;
+}
+
+.sp-thumb-el {
+	width : 50px !important;
+	height : 50px !important;
+}
+
+.sp-picker-container  {
+	width : 300px !important;
+	height : 300px !important;
+}
+
+.sp-palette {
+	max-width : 600px !important;
+}
+
+.actionsContainer {
+	max-width: 930px;
+	min-width: 930px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.action {
+	flex: 0 1 80px;
+	display: flex;
+	justify-content: center;
+	color: #888888;
+}
+
+.action:hover {
+	color: #18B6F8;
+	cursor: pointer;
+}
