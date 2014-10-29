@@ -3,6 +3,8 @@
 
 var canvasElem = document.getElementById("overlayCanvas");
 
+$(canvasElem).css({ width : $("#mainCanvas").css("width"), height : $("#mainCanvas").css("height") });
+
 window.CanvasOverlaySketch = {
 	clear : function() {
 		ctx.clear();
@@ -26,22 +28,27 @@ window.CanvasOverlaySketch = {
 	
 	hide : function() {
 		$(canvasElem).css({ display : "none" });
+	},
+	
+	get imageData() {
+		return ctx.getImageData(0, 0, ctx.width, ctx.height);
 	}
 };
 
 var ctx = Sketch.create({
-	fullscreen : true,
+	fullscreen : false,
+	width : $(canvasElem).width(),
+	height: $(canvasElem).height(),
 	container : canvasElem,
 	autoclear : false,
 	update: function() {
 		//radius = 2 + abs( sin( this.millis * 0.003 ) * 50 );
 	},
-	keydown : function() {return;
-		//if ( this.keys.C )
-		this.clear();
-	},
 	touchmove: function() {
 		this._drawLine();
+	},
+	touchend: function() {
+		//RemainFilled.decrease(CanvasOverlaySketch.imageData);
 	},
 	_drawLine : function() {
 		for ( var i = this.touches.length - 1, touch; i >= 0; i-- ) {
@@ -61,6 +68,9 @@ var ctx = Sketch.create({
 			this.moveTo(touch.ox, touch.oy);
 			this.lineTo(toX, toY);
 			this.stroke();
+			
+			//var pixelOffset = this.width * touch.oy;
+			
 		}
 	}
 });

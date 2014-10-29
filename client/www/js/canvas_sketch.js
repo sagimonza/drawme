@@ -18,11 +18,17 @@ window.CanvasSketch = {
 	
 	get rect() {
 		return $(mainElem)[0].getBoundingClientRect();
+	},
+	
+	get imageData() {
+		return ctx.getImageData(0, 0, ctx.width, ctx.height);
 	}
 };
 
 var ctx = Sketch.create({
-	fullscreen : true,
+	fullscreen : false,
+	width : $(mainElem).width(),
+	height: $(mainElem).height(),
 	container : mainElem,
 	autoclear : false,
 	update: function() {

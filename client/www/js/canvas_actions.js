@@ -9,7 +9,10 @@ $("#flightTest").click(function() {
 	CanvasSketch.disable();
 	CanvasOverlaySketch.init();
 	CanvasOverlaySketch.show();
+	RemainFilled.init();
+	
 	$(this).css({ display : "none" });
+	$("#clearCanvas").css({ display : "none" });
 	$("#restartCanvas").css({ display : "" });
 	$("#glanceCanvas").css({ display : "" });
 });
@@ -19,9 +22,11 @@ $("#restartCanvas").click(function() {
 	CanvasSketch.clear();
 	CanvasSketch.enable();
 	CanvasOverlaySketch.hide();
+	RemainFilled.hide();
 	$(this).css({ display : "none" });
-	$("#flightTest").css({ display : "" });
 	$("#glanceCanvas").css({ display : "none" });
+	$("#flightTest").css({ display : "" });
+	$("#clearCanvas").css({ display : "" });
 });
 
 $("#glanceCanvas").on("touchstart", function() {

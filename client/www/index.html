@@ -16,14 +16,15 @@
 			<input id="colorpicker" class="header-action action" type="text"></input>
 			<div id="brushSize" data-dropdown="#brushSizeMenu" class="header-action action"><i class="fa fa-pencil fa-3x"></i></div>
 			<div id="clearCanvas" class="header-action action"><i class="fa fa-trash-o fa-3x"></i></div>
+			<div id="glanceCanvas" class="header-action action" style="display:none"><i class="fa fa-eye fa-3x"></i></div>
 			<div id="flightTest" class="header-action action"><i class="fa fa-play fa-3x"></i></div>
 			<div id="restartCanvas" class="header-action action" style="display:none"><i class="fa fa-refresh fa-3x"></i></div>
-			<div id="glanceCanvas" class="header-action action" style="display:none"><i class="fa fa-eye fa-3x"></i></div>
-			<div id="sendCanvas" class="header-action action"><i class="fa fa-send fa-3x"></i></div>
+			<div id="sendCanvas" class="header-action action" style="display:none"><i class="fa fa-send fa-3x"></i></div>
+			<div id="remainFilledWrapper" class="header-action action" style="display:none"><i id="remainFilled" class="fa fa-3x"></i></div>
 		</div>
 	</div>
 	<hr class="divider" size="6" noshade>
-	<div id="mainCanvas"></div>
+	<div id="mainCanvas" style="height:80%"></div>
 	<div id="overlayCanvas" style="display:none;"></div>
 
 	<div id="brushSizeMenu" class="dropdown">
@@ -39,6 +40,7 @@
 	<script src="js/canvas_sketch.js"></script>
 	<script src="js/canvas_overlay_sketch.js"></script>
 	<script src="js/canvas_actions.js"></script>
+	<script src="js/remainFilled.js"></script>
 	<script src="js/brush.js"></script>
 	<script src="js/paint.js"></script>
 </body>

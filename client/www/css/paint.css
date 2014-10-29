@@ -1,10 +1,9 @@
+
 .colorpickerReplacer {
 	background-color: white;
 	border-color: #888888;
 	width : 70px;
 	height : 44px;
-#	width : 100px;
-#	height: 100px;
 }
 
 .sp-replacer:hover, .sp-replacer.sp-active {
