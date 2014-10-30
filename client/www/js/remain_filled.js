@@ -1,13 +1,11 @@
 
 (function() {
 
-var remainFilled = $("#remainFilled");
+var remainFilledElem = $("#remainFilledWrapper");
 
 window.RemainFilled = {
 	init : function() {
-		return;
-		
-		remainFilled.text("0%");
+		remainFilledElem.text("0%");
 		
 		var canvasData = {}, canvasDataPixels = 0;
 		var imageData = CanvasSketch.imageData.data;
@@ -18,7 +16,7 @@ window.RemainFilled = {
 			}
 		}
 		
-		this._canvasData = { data : canvasData, count : canvasDataPixels };
+		this.canvasData = { data : canvasData, count : canvasDataPixels };
 		console.log("pixels:" + canvasDataPixels);
 		this._pixelsLeft = canvasDataPixels;
 	},
@@ -32,7 +30,7 @@ window.RemainFilled = {
 	},
 	
 	decrease : function(data) {
-		var imageData = data.data, canvasData = this._canvasData.data, empty = [];
+		var imageData = data.data, canvasData = this.canvasData.data, empty = [];
 		for (var i = 0; i < imageData.length; ++i) {
 			if (imageData[i] == 0 && canvasData[i]) {
 				delete canvasData[i];
@@ -40,7 +38,7 @@ window.RemainFilled = {
 			}
 		}
 		
-		remainFilled.text("" + (100 - Math.round(Number((this._pixelsLeft / this._canvasData.count).toFixed(2)) * 100)) + "%");
+		remainFilledElem.text("" + (100 - Math.round(Number((this._pixelsLeft / this.canvasData.count).toFixed(2)) * 100)) + "%");
 	}
 };
 

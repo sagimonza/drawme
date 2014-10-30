@@ -6,10 +6,13 @@ $("#clearCanvas").click(function() {
 });
 
 $("#flightTest").click(function() {
+	CanvasOverlaySketch.clear();
 	CanvasSketch.disable();
 	CanvasOverlaySketch.init();
 	CanvasOverlaySketch.show();
 	RemainFilled.init();
+	Countdown.init();
+	Countdown.show();
 	
 	$(this).css({ display : "none" });
 	$("#clearCanvas").css({ display : "none" });
@@ -18,11 +21,12 @@ $("#flightTest").click(function() {
 });
 
 $("#restartCanvas").click(function() {
-	CanvasOverlaySketch.clear();
 	CanvasSketch.clear();
 	CanvasSketch.enable();
 	CanvasOverlaySketch.hide();
 	RemainFilled.hide();
+	Countdown.stop();
+	Countdown.hide();
 	$(this).css({ display : "none" });
 	$("#glanceCanvas").css({ display : "none" });
 	$("#flightTest").css({ display : "" });
@@ -31,14 +35,12 @@ $("#restartCanvas").click(function() {
 
 $("#glanceCanvas").on("touchstart", function() {
 	CanvasOverlaySketch.hide();
+	Countdown.start("turbo");
 });
 
-$("#glanceCanvas").on("touchend", function() {
+$("#glanceCanvas").on("touchend touchmove", function() {
 	CanvasOverlaySketch.show();
-});
-
-$("#glanceCanvas").on("touchmove", function() {
-	CanvasOverlaySketch.show();
+	if (Countdown.stop()) $("#restartCanvas").trigger("click");
 });
 
 })();

@@ -44,10 +44,14 @@ var ctx = Sketch.create({
 	update: function() {
 		//radius = 2 + abs( sin( this.millis * 0.003 ) * 50 );
 	},
+	touchstart : function() {
+		Countdown.start();
+	},
 	touchmove: function() {
 		this._drawLine();
 	},
 	touchend: function() {
+		if (Countdown.stop()) $("#restartCanvas").trigger("click");
 		//RemainFilled.decrease(CanvasOverlaySketch.imageData);
 	},
 	_drawLine : function() {
