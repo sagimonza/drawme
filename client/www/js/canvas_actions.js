@@ -33,12 +33,19 @@ $("#restartCanvas").click(function() {
 	$("#clearCanvas").css({ display : "" });
 });
 
-$("#glanceCanvas").on("touchstart", function() {
+var _glanceStarted = false;
+$("#glanceCanvas").on("mousedown touchstart", function(e) {
+	if (_glanceStarted) return;
+	
+	_glanceStarted = true;
 	CanvasOverlaySketch.hide();
 	Countdown.start("turbo");
 });
 
-$("#glanceCanvas").on("touchend touchmove", function() {
+$("#glanceCanvas").on("touchend touchmove mouseup", function(e) {
+	if (!_glanceStarted) return;
+	
+	_glanceStarted = false;
 	CanvasOverlaySketch.show();
 	if (Countdown.stop()) $("#restartCanvas").trigger("click");
 });

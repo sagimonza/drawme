@@ -25,26 +25,33 @@ window.CanvasSketch = {
 	}
 };
 
+function onTouchStart(e) {
+	if (this._paint) return;
+	this._paint = true;
+	this._drawLine();
+}
+
+function onTouchEnd(e) {
+	if (!this._paint) return;
+	this._paint = false;
+}
+
 var ctx = Sketch.create({
 	fullscreen : false,
 	width : $(mainElem).width(),
 	height: $(mainElem).height(),
 	container : mainElem,
 	autoclear : false,
-	update: function() {
-		//radius = 2 + abs( sin( this.millis * 0.003 ) * 50 );
-	},
-	mousedown : function() {
-		this._drawLine();
-	},
-	touchstart : function() {
-		//this._drawLine();
-	},
+	mousedown : onTouchStart,
+	touchstart : onTouchStart,
 	touchmove: function() {
 		this._drawLine();
 	},
+	touchend : onTouchEnd,
+	mouseup : onTouchEnd,
+	mouseout : onTouchEnd,
 	_drawLine : function() {
-		if (this._disabled) return;
+		if (this._disabled || !this._paint) return;
 		
 		for ( var i = this.touches.length - 1, touch; i >= 0; i-- ) {
 
@@ -66,25 +73,5 @@ var ctx = Sketch.create({
 		}
 	}
 });
-
-//ctx.globalCompositeOperation = "destination-over";
-/*
-ctx.draw = function() {
-    ctx.beginPath();
-    ctx.arc( random( ctx.width ), random( ctx.height ), 10, 0, TWO_PI );
-    ctx.fill();
-}
-
-ctx.mousemove = function( e ) {
-    for ( var i = 0, n = e.touches.length; i < n; i++ ) {
-        ctx.arc( e.touches[i].x, e.touches[i].y, 10, 0, TWO_PI );
-    }
-}
-
-ctx.draw = function() {
-    for ( var i = 0, n = ctx.touches.length; i < n; i++ ) {
-        ctx.arc( ctx.touches[i].x, ctx.touches[i].y, 10, 0, TWO_PI );
-    }
-}*/
 
 })();

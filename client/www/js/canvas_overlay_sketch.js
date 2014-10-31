@@ -15,6 +15,7 @@ window.CanvasOverlaySketch = {
 		ctx.fillStyle = "rgba(153,153,153,1)";
 		ctx.fillRect(0, 0, ctx.width, ctx.height);
 		ctx.globalCompositeOperation = "destination-out";
+		ctx._paint = false;
 	},
 	
 	show : function() {
@@ -35,26 +36,35 @@ window.CanvasOverlaySketch = {
 	}
 };
 
+function onTouchStart(e) {
+	if (this._paint) return;
+	this._paint = true;
+	Countdown.start();
+}
+
+function onTouchEnd(e) {
+	if (!this._paint) return;
+	this._paint = false;
+	if (Countdown.stop()) $("#restartCanvas").trigger("click");
+}
+
 var ctx = Sketch.create({
 	fullscreen : false,
 	width : $(canvasElem).width(),
 	height: $(canvasElem).height(),
 	container : canvasElem,
 	autoclear : false,
-	update: function() {
-		//radius = 2 + abs( sin( this.millis * 0.003 ) * 50 );
-	},
-	touchstart : function() {
-		Countdown.start();
-	},
+	touchstart : onTouchStart,
+	mousedown : onTouchStart,
 	touchmove: function() {
 		this._drawLine();
 	},
-	touchend: function() {
-		if (Countdown.stop()) $("#restartCanvas").trigger("click");
-		//RemainFilled.decrease(CanvasOverlaySketch.imageData);
-	},
+	touchend: onTouchEnd,
+	mouseup: onTouchEnd,
+	mouseout: onTouchEnd,
 	_drawLine : function() {
+		if (!this._paint) return;
+		
 		for ( var i = this.touches.length - 1, touch; i >= 0; i-- ) {
 
 			touch = this.touches[i];
