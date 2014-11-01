@@ -1,3 +1,6 @@
+* {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
 
 .colorpickerReplacer {
 	background-color: white;
@@ -67,6 +70,11 @@
 
 .action:hover {
 	cursor: pointer;
+}
+
+.action:active {
+	cursor: pointer;
+	color: #18B6F8;
 }
 
 .header-action {

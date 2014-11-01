@@ -17,7 +17,7 @@ $("#restartCanvas").magnificPopup({
 		
 		open : function() {
 			setTimeout(function() {
-				RemainFilled.decrease(CanvasOverlaySketch.imageData);
+				RemainFilled.calcScore();
 				ScoreLoadingSpinner.hide();
 				RemainFilled.show();
 			}, 10);

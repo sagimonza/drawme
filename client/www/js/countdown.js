@@ -1,4 +1,4 @@
-
+// todo: number of time user start touch (higher-->lower score)
 (function() {
 
 var countdownElem = $("#countdownWrapper");
@@ -13,9 +13,9 @@ window.Countdown = {
 	},
 	
 	init : function() {
-		this.setTick();
-		this._remainTime = RemainFilled.canvasData.count * 0.5;
-		$("#countdown").text("" + Math.round((this._remainTime / 1000)));
+		this._setTick();
+		this.initRemainTime = this.remainTime = Level.config.remainTime(RemainFilled.canvasData.count);
+		$("#countdown").text("" + Math.round((this.remainTime / 1000)));
 	},
 	
 	start : function(type) {
@@ -25,35 +25,44 @@ window.Countdown = {
 				return;
 			}
 			
+			$this._lastTickStartTS = Date.now();
 			$this._tickTimer = setTimeout(tickLoop, $this._tickStep);
 		}
 		var $this = this;
 		
-		this.setTick(type);
+		this._setTick(type);
 		console.log("countdown start:" + this._tickStep);
-		this._tickTimer = setTimeout(tickLoop, this._tickStep);
+		this._debtTickStep = this._debtTickStep || this._tickStep;
+		this._lastTickStartTS = Date.now();
+		this._tickTimer = setTimeout(tickLoop, Math.min(this._debtTickStep, this._tickStep));
 		this._ticked = false;
 	},
 	
 	stop : function() {
 		console.log("countdown stop:" + !!this._tickTimer);
+		this._debtTickStep = (Date.now() - this._lastTickStartTS);
 		clearTimeout(this._tickTimer);
-		return this.tick(true);
+		return this.remainTime <= 0;
 	},
 	
 	tick : function(isStopTick) {
-		console.log("tick, this._remainTime=" + this._remainTime);
-		if (this._remainTime <= 0) return true;
+		console.log("tick, this.remainTime=" + this.remainTime);
+		if (this.concreteRemainTime <= 0) return true;
 		if (isStopTick && this._ticked) return;
 
 		this._ticked = true;
-		this._remainTime -= 1000;
-		$("#countdown").text("" + Math.max(Math.round((this._remainTime / 1000)), 0));
+		this.remainTime -= 1000;
+		$("#countdown").text("" + this.concreteRemainTime);
+		if (this.concreteRemainTime <= 0) return true;
 	},
 	
-	setTick : function(type) {
+	get concreteRemainTime() {
+		return Math.max(Math.round((this.remainTime / 1000)), 0);
+	},
+	
+	_setTick : function(type) {
 		switch(type) {
-			case "turbo"	: this._tickStep = 500; break;
+			case "turbo"	: this._tickStep = 300; break;
 			case "normal"	: // fall through
 			default			: this._tickStep = 1000; break;
 		}

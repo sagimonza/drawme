@@ -24,7 +24,6 @@ $("#restartCanvas").click(function() {
 	CanvasSketch.clear();
 	CanvasSketch.enable();
 	CanvasOverlaySketch.hide();
-	RemainFilled.hide();
 	Countdown.stop();
 	Countdown.hide();
 	$(this).css({ display : "none" });
