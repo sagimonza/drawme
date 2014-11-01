@@ -10,7 +10,7 @@ $("#flightTest").click(function() {
 	CanvasSketch.disable();
 	CanvasOverlaySketch.init();
 	CanvasOverlaySketch.show();
-	RemainFilled.init();
+	Score.init();
 	Countdown.init();
 	Countdown.show();
 	

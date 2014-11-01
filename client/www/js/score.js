@@ -1,11 +1,11 @@
 
 (function() {
 
-var remainFilledElem = $("#remainFilledWrapper");
+var scoreElem = $("#scoreWrapper");
 
-window.RemainFilled = {
+window.Score = {
 	init : function() {
-		remainFilledElem.text("0%");
+		scoreElem.text("0%");
 		
 		var canvasData = {}, canvasDataPixels = 0;
 		var imageData = CanvasSketch.imageData.data;
@@ -23,11 +23,11 @@ window.RemainFilled = {
 	},
 	
 	show : function() {
-		$("#remainFilledWrapper").css({ display : "" });
+		$("#scoreWrapper").css({ display : "" });
 	},
 	
 	hide : function() {
-		$("#remainFilledWrapper").css({ display : "none" });
+		$("#scoreWrapper").css({ display : "none" });
 	},
 	
 	calcScore : function() {
@@ -53,7 +53,7 @@ window.RemainFilled = {
 			" this._wrongPixelsCount:", this._wrongPixelsCount, " this.canvasData.count:", this.canvasData.count, " wrongPixelsBonus:", wrongPixelsBonusFactor,
 			" this._correctPixelsCount:", this._correctPixelsCount, " correctPixelsBonus:", correctPixelsBonusFactor));
 		
-		remainFilledElem.text("" + Math.round(Number(correctPixelsBonusFactor.toFixed(2)) * 100) + "%");
+		scoreElem.text("" + Math.round(Number(correctPixelsBonusFactor.toFixed(2)) * 100) + "%");
 	}
 };
 

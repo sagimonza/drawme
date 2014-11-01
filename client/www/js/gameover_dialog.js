@@ -11,15 +11,15 @@ $("#restartCanvas").magnificPopup({
 	},
 	callbacks : {
 		beforeOpen : function() {
-			RemainFilled.hide();
+			Score.hide();
 			ScoreLoadingSpinner.show();
 		},
 		
 		open : function() {
 			setTimeout(function() {
-				RemainFilled.calcScore();
+				Score.calcScore();
 				ScoreLoadingSpinner.hide();
-				RemainFilled.show();
+				Score.show();
 			}, 10);
 		},
 		

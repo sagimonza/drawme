@@ -59,6 +59,6 @@ var LevelConfig = {
 
 var validLevels = ["easy", "medium", "hard"];
 
-Level.setLevel(Level.LEVEL_HARD);
+Level.setLevel(Level.LEVEL_MEDIUM);
 
 })();

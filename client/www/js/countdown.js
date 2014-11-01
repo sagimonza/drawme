@@ -14,7 +14,7 @@ window.Countdown = {
 	
 	init : function() {
 		this._setTick();
-		this.initRemainTime = this.remainTime = Level.config.remainTime(RemainFilled.canvasData.count);
+		this.initRemainTime = this.remainTime = Level.config.remainTime(Score.canvasData.count);
 		$("#countdown").text("" + Math.round((this.remainTime / 1000)));
 	},
 	
